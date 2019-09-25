@@ -1,11 +1,14 @@
 <template>
   <div>
-    <div v-if="searchable && searchPlace === 'top'" class="search-con search-con-top">
+    <div v-if="searchable && searchPlace === 'top'" class="search-con search-con-top" style="display:inline-block;">
       <Select v-model="searchKey" class="search-col">
         <Option v-for="item in columns" v-if="item.key !== 'handle'" :value="item.key" :key="`search-col-${item.key}`">{{ item.title }}</Option>
       </Select>
       <Input @on-change="handleClear" clearable placeholder="输入关键字搜索" class="search-input" v-model="searchValue"/>
-      <Button @click="handleSearch" class="search-btn" type="primary"><Icon type="search"/>&nbsp;&nbsp;搜索</Button>
+      <Button @click="handleSearch" class="search-btn" type="primary"><Icon type="search"/>&nbsp;&nbsp;搜索</Button>&nbsp;
+    </div>
+    <div v-if="addible" style="display:inline-block;">
+      <Button @click="handleAdd($event)" class="add-btn" type="primary"><Icon type="add"/>&nbsp;&nbsp;新增</Button>
     </div>
     <Table
       ref="tablesMain"
@@ -124,6 +127,10 @@ export default {
      * @description 是否可搜索
      */
     searchable: {
+      type: Boolean,
+      default: false
+    },
+    addible: {
       type: Boolean,
       default: false
     },
@@ -256,6 +263,9 @@ export default {
     },
     onExpand (row, status) {
       this.$emit('on-expand', row, status)
+    },
+    handleAdd ($event) {
+      this.$emit('handleAdd', $event)
     }
   },
   watch: {
