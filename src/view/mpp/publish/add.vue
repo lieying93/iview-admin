@@ -185,6 +185,9 @@ export default {
       }
     }
   },
+  mounted: function() {
+    this.load_pushObjectTypeList();
+  },
   methods: {
     ...mapMutations(['closeTag', 'addTag']),
     showFormItem (type) {
@@ -257,6 +260,9 @@ export default {
           // });
         }
       })
+    },
+    load_pushObjectTypeList(){
+       this.pushObjectTypeList = pushObjectTypeList
     }
   }
 }

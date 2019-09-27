@@ -3,7 +3,7 @@
     <el-card>
       <el-row type="flex" align="middle" :gutter="20" style="padding:20px 0;">
         <el-col :span="10" style="width: 200px;text-align: center;">
-          <el-input placeholder="输入关键字搜索" v-model="input" clearable></el-input>
+          <el-input placeholder="输入关键字搜索" v-model="search" clearable></el-input>
         </el-col>
         <el-col :span="13">
           <el-button type="primary" icon="el-icon-search">搜索</el-button>
@@ -48,6 +48,7 @@ var data = {
   activeNum: 0,
   dialogFormVisible: false,
   formLabelWidth: '120px',
+  search: '',
   form: [],
   filteredTableData: [
     {

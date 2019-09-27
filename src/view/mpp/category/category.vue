@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <el-row type="flex" align="middle" :gutter="20" style="padding:20px 0;">
         <el-col :span="10" style="width: 200px;text-align: center;">
-          <el-input placeholder="输入关键字搜索" v-model="input" clearable></el-input>
+          <el-input placeholder="输入关键字搜索"   v-model="search" clearable></el-input>
         </el-col>
         <el-col :span="13">
           <!--<el-button :plain="true" type="info">设置活动分类</el-button>-->
@@ -47,7 +47,17 @@
         <el-table-column property="create_time" label="创建时间"></el-table-column>
         <el-table-column property="update_time" label="更新时间"></el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
-          <i class="el-icon-delete-solid"></i>
+          <el-popover
+            placement="top"
+            width="160"
+            v-model="visible">
+            <p>这是一段内容这是一段内容确定删除吗？</p>
+            <div style="text-align: right; margin: 0">
+              <el-button size="mini" type="text" @click="visible = false">取消</el-button>
+              <el-button type="primary" size="mini" @click="visible = false">确定</el-button>
+            </div>
+          </el-popover>
+          <i class="el-icon-delete-solid" v-on="handleRemove()"></i>
         </el-table-column>
       </el-table>
 
@@ -65,11 +75,6 @@
   </div>
 </template>
 <script>
-const PRE_URL = '/api/jcsj-sjzx-ryjcsj/'
-const API_CONST = {
-  LOAD_TAG_LIST: PRE_URL + 'query'
-}
-
 var data = {
   totalActiveNum: 3,
   totalSignUp: 204,
@@ -78,6 +83,8 @@ var data = {
   activeNum: 0,
   dialogFormVisible: false,
   formLabelWidth: '120px',
+  search: '',
+  visible: false,
   form: [],
   tableData: [
     {
@@ -177,15 +184,16 @@ export default {
       this.activeNum = this.selectItems.length
     },
     handleRemove: function () {
-      var tableData = this.tableData
-      this.selectItems.forEach(function (sourcekey) {
-        tableData.forEach(function (data) {
-          if (id == data.id) {
-            tableData.splice(tableData.indexOf(data), 1)
-          }
-        })
-      })
-      this.selectItems = []
+      this.visible = true
+      // var tableData = this.tableData
+      // this.selectItems.forEach(function (sourcekey) {
+      //   tableData.forEach(function (data) {
+      //     if (id == data.id) {
+      //       tableData.splice(tableData.indexOf(data), 1)
+      //     }
+      //   })
+      // })
+      // this.selectItems = []
     },
     handleQuery: function () {
       var tableData = this.tableData

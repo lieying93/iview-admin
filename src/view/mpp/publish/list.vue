@@ -3,7 +3,7 @@
     <el-card>
       <el-row type="flex" align="middle" :gutter="20" style="padding:20px 0;">
         <el-col :span="10" style="width: 200px;text-align: center;">
-          <el-input placeholder="输入关键字搜索" v-model="input" clearable></el-input>
+          <el-input placeholder="输入关键字搜索" v-model="search" clearable></el-input>
         </el-col>
         <el-col :span="13">
           <el-button type="primary" icon="el-icon-search">搜索</el-button>
@@ -46,6 +46,7 @@ var data = {
   dataCount: 0,
   pageSize: 5,
   current: 1,
+  search: '',
   tableData: [
     {
       job_id: '1169159351840059394',
@@ -140,10 +141,10 @@ export default {
     var queryPage = {}
     queryPage.size = this.pageSize
     queryPage.current = 1
-    // postData('/api/mpp/jobmain/listPage',queryPage).then(res => {
-    //   this.tableData=res.data.data.records;
-    //   this.dataCount=parseInt(res.data.data.total);
-    // });
+    this.$axios.post('/api/mpp/jobmain/listPage',queryPage).then(res => {
+      this.tableData=res.data.data.records;
+      this.dataCount=parseInt(res.data.data.total);
+    });
   }
 }
 </script>

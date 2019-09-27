@@ -15,7 +15,7 @@ const resolve = dir => {
 const BASE_URL = process.env.NODE_ENV === 'production'
   ? '/'
   : '/'
-
+// const BASE_URL = ''
 module.exports = {
   // Project deployment base
   // By default we assume your app will be deployed at the root of a domain,
@@ -35,9 +35,15 @@ module.exports = {
       .set('_c', resolve('src/components'))
   },
   // 设为false打包时不生成.map文件
-  productionSourceMap: false
+  productionSourceMap: false,
   // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
-  // devServer: {
-  //   proxy: 'localhost:3000'
-  // }
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://192.168.65.2:9002',
+        pathRewrite: { '^/api': '' },
+        changeOrigin: true
+      }
+    }
+  }
 }
