@@ -141,10 +141,10 @@ export default {
     var queryPage = {}
     queryPage.size = this.pageSize
     queryPage.current = 1
-    this.$axios.post('/api/mpp/jobmain/listPage',queryPage).then(res => {
-      this.tableData=res.data.data.records;
-      this.dataCount=parseInt(res.data.data.total);
-    });
+    this.$axios.post('/api/mpp/jobmain/listPage', queryPage).then(res => {
+      this.tableData = res.data.data.records
+      this.dataCount = parseInt(res.data.data.total)
+    })
   }
 }
 </script>

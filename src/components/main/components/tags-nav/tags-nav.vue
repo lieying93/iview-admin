@@ -15,9 +15,9 @@
       <li v-for="(item, key) of menuList" @click="handleTagsOption(key)" :key="key">{{item}}</li>
     </ul>
     <div class="btn-con left-btn">
-      <Button type="text" @click="handleScroll(240)">
+      <el-button type="text" @click="handleScroll(240)">
         <Icon :size="18" type="ios-arrow-back" />
-      </Button>
+      </el-button>
     </div>
     <div class="btn-con right-btn">
       <Button type="text" @click="handleScroll(-240)">
@@ -27,19 +27,19 @@
     <div class="scroll-outer" ref="scrollOuter" @DOMMouseScroll="handlescroll" @mousewheel="handlescroll">
       <div ref="scrollBody" class="scroll-body" :style="{left: tagBodyLeft + 'px'}">
         <transition-group name="taglist-moving-animation">
-          <Tag
-            type="dot"
+          <el-tag
+            type="info"
             v-for="(item, index) in list"
             ref="tagsPageOpened"
             :key="`tag-nav-${index}`"
             :name="item.name"
             :data-route-item="item"
-            @on-close="handleClose(item)"
+            @close="handleClose(item)"
             @click.native="handleClick(item)"
             :closable="item.name !== $config.homeName"
-            :color="isCurrentTag(item) ? 'primary' : 'default'"
+            :color="isCurrentTag(item) ? '#409EFF' : '#FFFFFF'"
             @contextmenu.prevent.native="contextMenu(item, $event)"
-          >{{ showTitleInside(item) }}</Tag>
+          >{{ showTitleInside(item) }}</el-tag>
         </transition-group>
       </div>
     </div>

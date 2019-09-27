@@ -185,8 +185,8 @@ export default {
       }
     }
   },
-  mounted: function() {
-    this.load_pushObjectTypeList();
+  mounted: function () {
+    this.load_pushObjectTypeList()
   },
   methods: {
     ...mapMutations(['closeTag', 'addTag']),
@@ -261,8 +261,8 @@ export default {
         }
       })
     },
-    load_pushObjectTypeList(){
-       this.pushObjectTypeList = pushObjectTypeList
+    load_pushObjectTypeList () {
+      this.pushObjectTypeList = pushObjectTypeList
     }
   }
 }
